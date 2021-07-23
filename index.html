@@ -2,18 +2,52 @@
 
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+
 	<script>
-		// TODO: create a handler
-    window.addEventListener("load", function(){
-        // TODO: register the handler
-    });
+		// this function check what browser choose the user and  send the url to the action in the form
+		function setSearchEngine(event){
+			let actions = {
+			"google": "https://www.google.com/search",
+			"DuckDuckGo": "https://duckduckgo.com/",
+			"Bing": "https://www.bing.com/search",
+			"Ask": "https://www.ask.com/web"
+			};
+
+			let form = document.getElementById("searchForm");
+			console.log("running");
+			let choice = document.querySelector("input[name=engine]:checked");
+			//alert(choice.value);
+			form.setAttribute("action", actions[choice.value]);
+		};
+		// this event  is triggered when the user click the submit button and trigger the function when it is called
+    	window.addEventListener("load", function(){
+			let  submitBtn = document.getElementById("myBtn");
+			submitBtn.addEventListener("click", function(){
+				setSearchEngine(submitBtn);
+			})
+   		 });
 	</script>
 </head>
 
 <body>
 
-	<form id="searchForm">
-    <!-- TODO: add form elements -->
+	<!--action = "https://www.google.com/" -->
+
+	<form id="searchForm"  method = "get">
+		<div> <!--SEARCH BOX-->
+			<input type="text" name = "q"/>
+		</div>
+		<div> <!--BROWSER OPTIONS-->
+			<label> <input type="radio" name ="engine" value="Google"> Google </label>
+			<label> <input type="radio" name ="engine" value="DuckDuckGo"> DuckDuckGo </label>
+			<label> <input type="radio" name ="engine" value="Bing"> Bing </label>
+			<label> <input type="radio" name ="engine" value = "Ask"> Ask </label>
+		</div>
+		<br>
+		<div> <!--SUBMIT BUTTON-->
+			<button type ="submit" id="myBtn"> Go! </button>
+		</div>	
 	</form>
 
 </body>
